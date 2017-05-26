@@ -1,0 +1,66 @@
+//3.学生成绩录入及学生成绩清单
+
+package score;
+
+import java.util.Scanner;
+
+
+public class ScoreZip2 {
+	public static void main(String[] arr) {
+		Scanner Sc = new Scanner(System.in);
+		ScoreZip Sr = new ScoreZip();
+		for (int i = 0; i < 5; i++) { //这里定义长度为五的学生成绩表
+			System.out.println("输入学生姓名:");
+			String name = Sc.next();
+			if (name.equals("n")) {
+				break;
+			}
+			System.out.println("英语分数:");
+			double English = Sc.nextDouble();
+			System.out.println("数学分数:");
+			double Math = Sc.nextDouble();
+			System.out.println("物理分数:");
+			double Physical = Sc.nextDouble();
+			System.out.println("化学分数:");
+			double Chemical = Sc.nextDouble();
+			System.out.println("生物分数:");
+			double Biology = Sc.nextDouble();
+			
+			
+			Score s = new Score(name, English,Math,Physical,Chemical,Biology);
+			Sr.setData(s, i);
+		}
+		System.out.println("=========================================" +
+				"学生成绩表======================================");
+		System.out.println("姓名\t\t英语成绩\t\t数学成绩\t\t物理成绩\t\t化学成绩\t\t生物成绩");
+		Score[] b = Sr.getData();
+		for (Score S : b) {
+			if (S == null) {
+				break;
+			}
+			System.out.println(S.name + "\t\t" + S.EnglishGrade+"\t\t"+S.MathGrade
+					+"\t\t"+S.phyicalGrade+"\t\t"+S.chemicalGrade+"\t\t"+S.biologicalGrade);
+		}
+		System.out.println("是否查找学生成绩？ 是Y 否N");
+		String flag = Sc.next();
+		if(flag.equals("Y")){
+		System.out.println("输入要查找的学生名:");
+		String name = Sc.next();
+		Score S = Sr.SerchData(name);
+		if (S == null) {
+			System.out.println("对不起，没有此学生名");
+		} else {
+			double mg = S.MathGrade;
+			double eg = S.EnglishGrade;
+			double pg = S.phyicalGrade;
+			double cg= S.chemicalGrade;
+			double bg = S.biologicalGrade;
+			double submit = mg+eg+pg+cg+bg;
+			System.out.println("要查找的学生为:" + name + "\n数学成绩为:" + mg
+					+ "\n英语成绩为:" + eg+ "\n物理成绩为:" + pg+ "\n化学成绩为:" + cg
+					+ "\n生物成绩为:" + bg+ "\n总成绩成绩为:" + submit);
+		     }
+		}
+	}
+}
+
